@@ -100,7 +100,8 @@ module BrowserStack
         end
       end
 
-      return start_cmd
+      # Return details of executed command
+      start_cmd
     end
 
     def isRunning
