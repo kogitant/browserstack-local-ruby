@@ -79,6 +79,11 @@ module BrowserStack
       if defined? spawn
         start_cmd = start_command_args
       end
+
+      File.open(@logfile, 'w') do |fo|
+        fo.puts "Starting a process with [#{start_cmd}]"
+      end
+
       @process = IO.popen(start_cmd)
 
       while true
@@ -99,9 +104,6 @@ module BrowserStack
           break
         end
       end
-
-      # Return details of executed command
-      start_cmd
     end
 
     def isRunning
