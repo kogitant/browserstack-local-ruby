@@ -75,11 +75,11 @@ module BrowserStack
         system("echo '' > '#{@logfile}'")
       end
 
+      start_cmd = start_command
       if defined? spawn
-        @process = IO.popen(start_command_args)
-      else
-        @process = IO.popen(start_command)
+        start_cmd = start_command_args
       end
+      @process = IO.popen(start_cmd)
 
       while true
         begin
@@ -99,6 +99,8 @@ module BrowserStack
           break
         end
       end
+
+      return start_cmd
     end
 
     def isRunning
@@ -130,8 +132,6 @@ module BrowserStack
       cmd += " --proxy-user #{@proxy_user}" if @proxy_user
       cmd += " --proxy-pass #{@proxy_pass}" if @proxy_pass
       cmd += " #{@force_proxy_flag} #{@force_flag} #{@verbose_flag} #{@hosts} #{@user_arguments.join(" ")} 2>&1"
-
-      puts cmd
       cmd.strip
     end
 
@@ -148,8 +148,6 @@ module BrowserStack
 
       args = args.select {|a| a.to_s != "" }
       args.push(:err => [:child, :out])
-
-      puts args
       args
     end
 
