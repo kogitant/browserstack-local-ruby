@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'browserstack-local'
-  s.version     = '1.3.1'
+  s.version     = '1.3.2'
   s.date        = '2017-03-27'
   s.summary     = "BrowserStack Local"
   s.description = "Ruby bindings for BrowserStack Local"
